@@ -34,5 +34,13 @@
             </table>
             </center>
         </form>
+        <form method="post" action="searchvalidate.jsp">
+            <center>
+            <table border="1" cellpadding="5" cellspacing="2">
+                <input type="hidden" name="keyword" value="" />
+                <input type="submit" value="View all cases" />
+            </table>
+            </center>
+        </form>
     </body>
 </html>

@@ -5,6 +5,8 @@
 --%>
 
 <%@ page import ="java.sql.*" %>
+<%@ page import ="swejis.*" %>
+<body>
 <%
     try{
         String keyword = request.getParameter("keyword");
@@ -17,6 +19,7 @@
         while(rs.next())
         {
            int id = rs.getInt("id");
+           Case.total_no = id;
            String details = rs.getString("details");
            out.print("Id: "+id+"\tDetails: "+details);
            %><form action="updatecase.jsp">
@@ -27,5 +30,13 @@
    }
    catch(Exception e){       
        out.println("Something went wrong !! Please try again\n"+e);       
-   }      
+   }     
 %>
+        Create a new case.<br>
+        <form method="post" action="createnewcase.jsp">
+            Enter details: <input type="text" name="details" required/>
+            <br>
+            Enter details of first hearing: <input type="text" name="hear" required/>
+            <input type="submit" value="Update" />
+        </form>
+</body>

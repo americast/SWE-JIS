@@ -14,7 +14,7 @@
     </head>
     <body>
         You have been successfully logged out.
-        <% user.name = null;%>
+        <% User.name = null;%>
         <jsp:include page = "index.html"/>
     </body>
 </html>
