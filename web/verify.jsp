@@ -1,28 +1,34 @@
 <%-- 
     Document   : verify
-    Created on : Mar 11, 2018, 1:14:01 PM
+    Created on : 12 Mar, 2018, 1:40:26 AM
     Author     : americast
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <%! String uname, pwd; %>
-        <%
-        uname = request.getParameter("uname");
-        pwd = request.getParameter("pwd");
-        if (uname.equals("a") && pwd.equals("a"))
-        {%>
-            <jsp:forward page = "welcome.jsp"/>
+<%@ page import ="java.sql.*" %>
+<%@ page import ="swejis.*" %>
+<%
+    try{
+        String username = request.getParameter("username");   
+        String password = request.getParameter("password");
+        Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?" + "user=root&password=root");    
+        PreparedStatement pst = conn.prepareStatement("Select user,pass from login where user=? and pass=?");
+        pst.setString(1, username);
+        pst.setString(2, password);
+        ResultSet rs = pst.executeQuery();              
+        if(rs.next())
+        {
+            User.name = username;
+        %>
+           <jsp:forward page = "welcome.jsp"/>      
         <%}
-        else {
-            %>Authentication failure.
-            <jsp:include page = "index.html"/>
-       <%}%>
-    </body>
-</html>
+        else
+        {%>
+           Authentication failure.
+           <jsp:include page = "index.html"/>
+        <%}
+   }
+   catch(Exception e){       
+       out.println("Something went wrong !! Please try again");       
+   }      
+%>

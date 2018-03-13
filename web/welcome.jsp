@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import ="swejis.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,17 +13,17 @@
         <title>Welcome!</title>
     </head>
     <body>
-        <% String uname;
-        uname = request.getParameter("uname");
-        %>
-        Hello, <%=uname%>
+        Hello, <%=User.name%>
         <br>
         
-        <form action="newcase.jsp" method="get">
+        <form action="search.jsp" method="get">
             <input type="submit" value="Create new case or search an existing case"/>
         </form>
         <form action="calendar.jsp" method="get">
             <input type="submit" value="View calendar"/>
+        </form>
+        <form action="logout.jsp" method="get">
+            <input type="submit" value="Logout"/>
         </form>
     </body>
 </html>

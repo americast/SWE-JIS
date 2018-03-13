@@ -11,25 +11,21 @@
         <title>Login Demo with JSP</title>
     </head>
     <body>
-        <form method="post" action="newcasevalidate.jsp">
+        <form method="post" action="searchvalidate.jsp">
             <center>
             <table border="1" cellpadding="5" cellspacing="2">
                 <thead>
                     <tr>
-                        <th colspan="2">Login Here</th>
+                        <th colspan="2">Search existing Case</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Username</td>
-                        <td><input type="text" name="username" required/></td>
+                        <td>Keyword</td>
+                        <td><input type="text" name="keyword" required/></td>
                     </tr>
                     <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="password" required/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center"><input type="submit" value="Login" />
+                        <td colspan="2" align="center"><input type="submit" value="Search" />
                             &nbsp;&nbsp;
                             <input type="reset" value="Reset" />
                         </td>                        
