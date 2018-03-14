@@ -21,7 +21,7 @@
         <title>Add to case</title>
     </head>
     <body>
-        <br><<br>
+        <br><br>
         <%
             try {
                 Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection

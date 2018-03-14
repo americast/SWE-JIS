@@ -23,6 +23,18 @@
         <%
             String caseno = request.getParameter("case");
             String status = request.getParameter("status");
+            try
+            {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?" + "user=root&password=root");
+                PreparedStatement pst = conn.prepareStatement("Select * from cases where id='"+caseno+"';");
+                ResultSet rs = pst.executeQuery();
+                while (rs.next())
+                    status = rs.getString("status");
+            }
+            catch(Exception e){
+                out.println("Something went wrong !! Please try again\n"+e);       
+            }   
             int seqlast = 1;
             try {   
                 Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
@@ -49,7 +61,7 @@
         %>
         <br><br>
         <%
-            if (status.equals("open"))
+            if (!status.equals("closed"))
             {
                 
         %>
