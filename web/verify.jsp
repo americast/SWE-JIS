@@ -6,6 +6,7 @@
 
 <%@ page import ="java.sql.*" %>
 <%@ page import ="swejis.*" %>
+
 <%
     try{
         String username = request.getParameter("username");   
@@ -18,10 +19,15 @@
         ResultSet rs = pst.executeQuery();              
         if(rs.next())
         {
+            
             User.name = username;
             User.type = rs.getString("type");
             User.realname = rs.getString("realname");
-            User.subscription = rs.getString("subscription");
+            if (User.type.equals("lawyer"))
+                User.subscription = rs.getString("subscription");
+            else
+                User.subscription = "yes";
+            out.println(username);
         %>
            <jsp:forward page = "welcome.jsp"/>      
         <%}

@@ -4,6 +4,12 @@
     Author     : americast
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import ="swejis.*" %>
+
+<% if (User.name==null) {
+    %>
+    <jsp:forward page = "index.html"/>
+    <%}%>
 <!DOCTYPE html>
 <html>
     <head>

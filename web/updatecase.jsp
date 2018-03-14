@@ -4,8 +4,15 @@
     Author     : americast
 --%>
 
+<%@page import="swejis.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.*" %>
+<%@ page import ="swejis.*" %>
+
+<% if (User.name==null) {
+    %>
+    <jsp:forward page = "index.html"/>
+    <%}%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,6 +53,8 @@
             {
                 
         %>
+        <%if (!User.type.equals("judge"))
+        {%>
         Add a new hearing.<br>
         <form method="post" action="addtocase.jsp">
             Enter date of hearing (DD-MM-YY): <input type="text" name="day" maxlength="2" size="2" required/> - <input type="text" name="month" maxlength="2" size="2" required/> - <input type="text" name="year" maxlength="2" size="2" required/><br>
@@ -97,6 +106,6 @@
         </form>
         <%
         }%>
-
+        <%}%>
     </body>
 </html>

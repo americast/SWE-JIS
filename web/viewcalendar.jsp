@@ -7,6 +7,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.*" %>
 <%@ page import ="swejis.*" %>
+
+<% if (User.name==null) {
+    %>
+    <jsp:forward page = "index.html"/>
+    <%}%>
 <jsp:include page = "calendar.jsp"/>
 
 <!DOCTYPE html>
@@ -16,7 +21,7 @@
         <title>Add to case</title>
     </head>
     <body>
-        <br><br>
+        <br><<br>
         <%
             try {
                 Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection

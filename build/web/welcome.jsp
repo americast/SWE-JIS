@@ -6,6 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="swejis.*" %>
+<% if (User.name==null) {
+    %>
+    <jsp:forward page = "index.html"/>
+    <%}%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,6 +35,9 @@
         <%}%>
         <form action="calendar.jsp" method="get">
             <input type="submit" value="View calendar"/>
+        </form>
+        <form action="chpwd.jsp" method="get">
+            <input type="submit" value="Change password"/>
         </form>
         <form action="logout.jsp" method="get">
             <input type="submit" value="Logout"/>

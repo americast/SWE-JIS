@@ -6,6 +6,12 @@
 
 <%@ page import ="java.sql.*" %>
 <%@ page import ="swejis.*" %>
+
+<% if (User.name==null) {
+    %>
+    <jsp:forward page = "index.html"/>
+    <%}%>
+
 <body>
 <%
     try{
@@ -28,7 +34,7 @@
            String crime = rs.getString("crime");
            String status = rs.getString("status");
            out.println("Id: "+id+"\tDetails: "+details+"\tDate: "+date+"\tLawyer: "+lawyer+"\tDefendant: "+defendant+"\tCrime: "+crime);
-           %><form action="updatecase.jsp">
+           %><form method = "post" action="updatecase.jsp">
                <input type="hidden" name="case" value="<%=id%>" /> 
                <input type="hidden" name="status" value="<%=status%>" /> 
                <input type="submit" value="View details"/>
@@ -39,6 +45,9 @@
        out.println("Something went wrong !! Please try again\n"+e);       
    }     
 %>
+
+        <% if (!User.type.equals("judge"))
+        {%>
         Create a new case.<br>
         <form method="post" action="createnewcase.jsp">
             Enter brief details: <input type="text" name="details" required/> <br>
@@ -47,4 +56,5 @@
             <br>
             <input type="submit" value="Create new case" />
         </form>
+        <%}%>
 </body>
