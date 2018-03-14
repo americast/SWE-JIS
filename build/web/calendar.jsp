@@ -9,9 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Calendar</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form method="post" action="viewcalendar.jsp">
+            <select name="type">
+                <option value="central">Centralised calendar</option>
+                <option value="personal">Personalised calendar</option>
+            </select> 
+            <input type="submit" value="View calendar" />
+        </form>
     </body>
 </html>
