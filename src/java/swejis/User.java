@@ -11,5 +11,7 @@ package swejis;
  */
 public class User {
     public static String name;
-    
+    public static String realname;
+    public static String type;
+    public static String subscription;
 }

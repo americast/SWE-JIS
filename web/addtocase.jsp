@@ -1,5 +1,5 @@
 <%-- 
-    Document   : updatecase
+    Document   : addtocase
     Created on : Mar 13, 2018, 9:32:04 PM
     Author     : americast
 --%>
@@ -20,8 +20,13 @@
                 int caseno = Integer.parseInt(request.getParameter("caseid"));
                 int seqno = Integer.parseInt(request.getParameter("seqid"));
                 String details = request.getParameter("details");
+                String day = request.getParameter("day");
+                String month = request.getParameter("month");
+                String year = request.getParameter("year");
+                String prosecutor = request.getParameter("prosecutor");
+                String judge = request.getParameter("judge");
                 
-                PreparedStatement pst = conn.prepareStatement("insert into case"+caseno+" values ("+(seqno+1)+", \'"+details+"\');");
+                PreparedStatement pst = conn.prepareStatement("insert into case"+caseno+" values ("+(seqno+1)+", \'"+details+"\', \'"+judge+"\', \'"+prosecutor+"\', \'"+day+"-"+month+"-"+year+"\');");
                 pst.executeUpdate();
                 out.println("Update successful.");
             }

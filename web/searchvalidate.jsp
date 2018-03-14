@@ -21,7 +21,11 @@
            int id = rs.getInt("id");
            Case.total_no = id;
            String details = rs.getString("details");
-           out.print("Id: "+id+"\tDetails: "+details);
+           String date = rs.getString("date");
+           String lawyer = rs.getString("lawyer");
+           String defendant = rs.getString("defendant");
+           String crime = rs.getString("crime");
+           out.println("Id: "+id+"\tDetails: "+details+"\tDate: "+"\tLawyer: "+lawyer+"\tDefendant: "+defendant+"\tCrime: "+crime);
            %><form action="updatecase.jsp">
                <input type="hidden" name="case" value="<%=id%>" /> 
                <input type="submit" value="View details"/>
@@ -34,9 +38,10 @@
 %>
         Create a new case.<br>
         <form method="post" action="createnewcase.jsp">
-            Enter details: <input type="text" name="details" required/>
+            Enter brief details: <input type="text" name="details" required/> <br>
+            Enter name of defendant: <input type="text" name="defendant" required/> <br>
+            Enter crime details: <input type="text" name="crime" required/> <br>
             <br>
-            Enter details of first hearing: <input type="text" name="hear" required/>
-            <input type="submit" value="Update" />
+            <input type="submit" value="Create new case" />
         </form>
 </body>

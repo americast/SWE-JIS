@@ -5,8 +5,10 @@
 --%>
 
 <%@page import="swejis.Case"%>
+<%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.*" %>
+<%@ page import ="swejis.*" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,23 +18,20 @@
     <body>
         <%
             try {
-                Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?" + "user=root&password=root");
                 int caseno = Case.total_no;
                 caseno++;
                 String details = request.getParameter("details");
-                String hearing_details = request.getParameter("hear");
+                String crime = request.getParameter("crime");
+                String defendant = request.getParameter("defendant");
 
-                PreparedStatement pst = conn.prepareStatement("create table case"+caseno+"(seq int, details char(255))");
+                PreparedStatement pst = conn.prepareStatement("create table case"+caseno+"(seq int, details char(255), judge char(25), prosecutor char(25), date char(30));");
                 pst.executeUpdate();
                 
-                pst = conn.prepareStatement("insert into case"+caseno+" values (1, \'"+hearing_details+"\');");
+                pst = conn.prepareStatement("insert into cases values ("+caseno+", \'"+details+"\',\'"+(new java.util.Date()).toLocaleString()+"\', \'"+defendant+"\', \'"+User.realname+"\', \'"+crime+"\');");
                 pst.executeUpdate();
                 
-                pst = conn.prepareStatement("insert into cases values ("+caseno+", \'"+details+"\');");
-                pst.executeUpdate();
-                
-                out.println("Update successful.");
+                out.println("New case creation successful.");
             }
                 
             catch(Exception e){

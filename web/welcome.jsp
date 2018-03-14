@@ -13,12 +13,22 @@
         <title>Welcome!</title>
     </head>
     <body>
-        Hello, <%=User.name%>
+        Hello, <%=User.realname%> (<%=User.type%>)
         <br>
-        
+        <%if(User.subscription.equals("no"))
+        {
+            out.println("Invalid subscription. Please contact registrar.");
+            %><form action="search.jsp" method="get">
+            <input type="submit" value="Create new case or search an existing case" disabled/>
+            </form>
+            <%
+        }
+        else
+        {%>
         <form action="search.jsp" method="get">
             <input type="submit" value="Create new case or search an existing case"/>
         </form>
+        <%}%>
         <form action="calendar.jsp" method="get">
             <input type="submit" value="View calendar"/>
         </form>

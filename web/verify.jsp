@@ -12,13 +12,16 @@
         String password = request.getParameter("password");
         Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?" + "user=root&password=root");    
-        PreparedStatement pst = conn.prepareStatement("Select user,pass from login where user=? and pass=?");
+        PreparedStatement pst = conn.prepareStatement("Select * from login where user=? and pass=?");
         pst.setString(1, username);
         pst.setString(2, password);
         ResultSet rs = pst.executeQuery();              
         if(rs.next())
         {
             User.name = username;
+            User.type = rs.getString("type");
+            User.realname = rs.getString("realname");
+            User.subscription = rs.getString("subscription");
         %>
            <jsp:forward page = "welcome.jsp"/>      
         <%}
@@ -29,6 +32,6 @@
         <%}
    }
    catch(Exception e){       
-       out.println("Something went wrong !! Please try again");       
+       out.println(e);       
    }      
 %>
