@@ -26,10 +26,21 @@
                 String prosecutor = request.getParameter("prosecutor");
                 String judge = request.getParameter("judge");
                 
-                PreparedStatement pst = conn.prepareStatement("insert into case"+caseno+" values ("+(seqno+1)+", \'"+details+"\', \'"+judge+"\', \'"+prosecutor+"\', \'"+day+"-"+month+"-"+year+"\');");
+                PreparedStatement pst = conn.prepareStatement("select * from login where user=\'"+judge+"\';");
+                ResultSet rs = pst.executeQuery();
+
+                String judge_name="";
+                while (rs.next())
+                  judge_name = rs.getString("realname");
+                
+                
+                pst = conn.prepareStatement("insert into case"+caseno+" values ("+(seqno+1)+", \'"+details+"\', \'"+judge_name+"\', \'"+prosecutor+"\', \'"+day+"-"+month+"-"+year+"\');");
                 pst.executeUpdate();
                 
                 pst = conn.prepareStatement("update cases set status='hearing' where id = " + caseno + ";");
+                pst.executeUpdate();
+                
+                pst = conn.prepareStatement("update cases set judgeuname=\'"+judge+"\' where id = " + caseno + ";");
                 pst.executeUpdate();
                 
                 out.println("Update successful.");

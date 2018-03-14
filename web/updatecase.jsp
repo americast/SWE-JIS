@@ -60,8 +60,9 @@
                             ResultSet rs = pst.executeQuery();
                             while (rs.next()) {
                                     String realname = rs.getString("realname");
+                                    String name = rs.getString("user");
                     %>
-                            <option value="<%=realname%>"> <%=realname%> </option>
+                            <option value="<%=name%>"> <%=realname%> </option>
                 <%          }
                 } catch (Exception e) {
                     out.println("Something went wrong !! Please try again.\n" + e);
