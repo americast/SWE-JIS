@@ -9,10 +9,7 @@
 <%@ page import ="java.sql.*" %>
 <%@ page import ="swejis.*" %>
 
-<% if (User.name==null) {
-    %>
-    <jsp:forward page = "index.html"/>
-    <%}%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -43,5 +40,29 @@
         
         %>
         <br><br>
-    </body>
+
+                <!Here footer>
+                </div></div>
+    		<div id="sidebar">
+			<div class="box2">
+				<div class="title">
+					<h2>Welcome <%=User.type%></h2>
+				</div>
+				<ul class="style2">
+					<li><%=User.realname%></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+    </div>
+	<div id="portfolio-wrapper">
+		<div id="portfolio" class="container">
+			<div id="column1">
+				<div class="title">
+					<h2>Sayan Sinha</h2>
+				</div>
+                            <p>16CS10048.</p></div>
+	</div>
+</div>
+</body>
 </html>
