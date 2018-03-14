@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Keyword</td>
+                        <td>Keyword or CIN</td>
                         <td><input type="text" name="keyword" required/></td>
                     </tr>
                     <tr>

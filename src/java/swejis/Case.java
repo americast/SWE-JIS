@@ -11,5 +11,6 @@ package swejis;
  */
 public class Case {
     public static int total_no = 0;
+    public static String status;
     
 }

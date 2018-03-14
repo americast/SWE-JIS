@@ -1,8 +1,9 @@
 <%-- 
-    Document   : addtocase
-    Created on : Mar 13, 2018, 9:32:04 PM
-    Author     : americast
+    Document   : closecase
+    Created on : Mar 14, 2018, 7:50:39 PM
+    Author     : TeamVideoSummarization
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.*" %>
@@ -10,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add to case</title>
+        <title>Close case</title>
     </head>
     <body>
         <%
@@ -19,19 +20,10 @@
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?" + "user=root&password=root");
                 int caseno = Integer.parseInt(request.getParameter("caseid"));
                 int seqno = Integer.parseInt(request.getParameter("seqid"));
-                String details = request.getParameter("details");
-                String day = request.getParameter("day");
-                String month = request.getParameter("month");
-                String year = request.getParameter("year");
-                String prosecutor = request.getParameter("prosecutor");
-                String judge = request.getParameter("judge");
                 
-                PreparedStatement pst = conn.prepareStatement("insert into case"+caseno+" values ("+(seqno+1)+", \'"+details+"\', \'"+judge+"\', \'"+prosecutor+"\', \'"+day+"-"+month+"-"+year+"\');");
+                PreparedStatement pst = conn.prepareStatement("update cases set status='closed' where id = "+caseno+";");
                 pst.executeUpdate();
-                
-                pst = conn.prepareStatement("update cases set status='hearing' where id = " + caseno + ";");
-                pst.executeUpdate();
-                
+
                 out.println("Update successful.");
             }
                 

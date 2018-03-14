@@ -1,8 +1,9 @@
 <%-- 
-    Document   : addtocase
-    Created on : Mar 13, 2018, 9:32:04 PM
+    Document   : addconclusion
+    Created on : Mar 14, 2018, 7:42:28 PM
     Author     : americast
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.*" %>
@@ -20,18 +21,13 @@
                 int caseno = Integer.parseInt(request.getParameter("caseid"));
                 int seqno = Integer.parseInt(request.getParameter("seqid"));
                 String details = request.getParameter("details");
-                String day = request.getParameter("day");
-                String month = request.getParameter("month");
-                String year = request.getParameter("year");
-                String prosecutor = request.getParameter("prosecutor");
-                String judge = request.getParameter("judge");
                 
-                PreparedStatement pst = conn.prepareStatement("insert into case"+caseno+" values ("+(seqno+1)+", \'"+details+"\', \'"+judge+"\', \'"+prosecutor+"\', \'"+day+"-"+month+"-"+year+"\');");
+                PreparedStatement pst = conn.prepareStatement("update case"+caseno+" set details=\'"+details+"\' where seq = "+seqno+";");
                 pst.executeUpdate();
                 
-                pst = conn.prepareStatement("update cases set status='hearing' where id = " + caseno + ";");
+                pst = conn.prepareStatement("update cases set status='open' where id = "+caseno+";");
                 pst.executeUpdate();
-                
+
                 out.println("Update successful.");
             }
                 

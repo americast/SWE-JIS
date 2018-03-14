@@ -15,6 +15,7 @@
     <body>
         <%
             String caseno = request.getParameter("case");
+            String status = request.getParameter("status");
             int seqlast = 1;
             try {   
                 Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
@@ -40,7 +41,12 @@
         
         %>
         <br><br>
-        Update this case.<br>
+        <%
+            if (status.equals("open"))
+            {
+                
+        %>
+        Add a new hearing.<br>
         <form method="post" action="addtocase.jsp">
             Enter date of hearing (DD-MM-YY): <input type="text" name="day" maxlength="2" size="2" required/> - <input type="text" name="month" maxlength="2" size="2" required/> - <input type="text" name="year" maxlength="2" size="2" required/><br>
             Enter name of prosecutor: <input type="text" name="prosecutor" required/><br>
@@ -62,10 +68,34 @@
             } 
             %>
             </select><br>
-            Enter conclusion <input type="text" name="details" required/><br>
+            <input type="hidden" name="details" value="(pending)"/><br>
             <input type="hidden" name="seqid" value="<%=seqlast%>">
             <input type="hidden" name="caseid" value="<%=caseno%>">
-            <input type="submit" value="Update" />
+            <input type="submit" value="Add hearing" />
         </form>
+            <%
+         }
+        else if (status.equals("hearing"))
+        {
+        %>
+        
+        <form method="post" action="addconclusion.jsp">
+         Add a conclusion to last hearing:   <input type="text" name="details" required/><br>
+         <input type="hidden" name="seqid" value="<%=seqlast%>">
+         <input type="hidden" name="caseid" value="<%=caseno%>">
+         <input type="submit" value="Update" />
+        </form>
+        <%
+        }%>
+        <% if (!status.equals("closed"))
+        {%>
+        <form method="post" action="closecase.jsp">
+            <input type="hidden" name="seqid" value="<%=seqlast%>">
+            <input type="hidden" name="caseid" value="<%=caseno%>">
+            <input type="submit" value="Close case" />
+        </form>
+        <%
+        }%>
+
     </body>
 </html>

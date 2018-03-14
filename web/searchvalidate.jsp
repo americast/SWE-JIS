@@ -12,8 +12,9 @@
         String keyword = request.getParameter("keyword");
         Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?" + "user=root&password=root");    
-        PreparedStatement pst = conn.prepareStatement("Select * from cases where details like ?");
+        PreparedStatement pst = conn.prepareStatement("Select * from cases where (id like ? or details like ?);");
         pst.setString(1, "%"+keyword+"%");
+        pst.setString(2, "%"+keyword+"%");
         ResultSet rs = pst.executeQuery();
         
         while(rs.next())
@@ -25,9 +26,11 @@
            String lawyer = rs.getString("lawyer");
            String defendant = rs.getString("defendant");
            String crime = rs.getString("crime");
-           out.println("Id: "+id+"\tDetails: "+details+"\tDate: "+"\tLawyer: "+lawyer+"\tDefendant: "+defendant+"\tCrime: "+crime);
+           String status = rs.getString("status");
+           out.println("Id: "+id+"\tDetails: "+details+"\tDate: "+date+"\tLawyer: "+lawyer+"\tDefendant: "+defendant+"\tCrime: "+crime);
            %><form action="updatecase.jsp">
                <input type="hidden" name="case" value="<%=id%>" /> 
+               <input type="hidden" name="status" value="<%=status%>" /> 
                <input type="submit" value="View details"/>
            </form><br><%
         }

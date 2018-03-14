@@ -28,7 +28,7 @@
                 PreparedStatement pst = conn.prepareStatement("create table case"+caseno+"(seq int, details char(255), judge char(25), prosecutor char(25), date char(30));");
                 pst.executeUpdate();
                 
-                pst = conn.prepareStatement("insert into cases values ("+caseno+", \'"+details+"\',\'"+(new java.util.Date()).toLocaleString()+"\', \'"+defendant+"\', \'"+User.realname+"\', \'"+crime+"\');");
+                pst = conn.prepareStatement("insert into cases values ("+caseno+", \'"+details+"\',\'"+(new java.util.Date()).toLocaleString()+"\', \'"+defendant+"\', \'"+User.realname+"\', \'"+crime+"\',\'open\');");
                 pst.executeUpdate();
                 
                 out.println("New case creation successful.");
