@@ -16,7 +16,7 @@ Design by TEMPLATED
 http://templated.co
 Released for free under the Creative Commons Attribution License
 
-Name       : Retention 
+Name       : JIS: Judiciary Information System 
 Description: A two-column, fixed-width design with dark color scheme.
 Version    : 1.0
 Released   : 20140221
@@ -25,7 +25,7 @@ Released   : 20140221
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Retention</title>
+<title>JIS: Judiciary Information System</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
@@ -48,7 +48,7 @@ Released   : 20140221
 	<div id="menu-wrapper">
 		<div id="menu" class="container">
                     <ul>
-				<li class="current_page_item"><a href="#">Software Engineering</a></li>
+				<li class="current_page_item"><a href="welcome.jsp">Home</a></li> <li class="current_page_item"> <a href="logout.jsp">Logout</a></li>
 			</ul>
 		</div>
 		<!-- end #menu --> 

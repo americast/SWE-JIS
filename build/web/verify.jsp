@@ -6,7 +6,11 @@
 
 <%@ page import ="java.sql.*" %>
 <%@ page import ="swejis.*" %>
-
+<script>
+   function alertName() {
+    alert("Hello! I am an alert box!");
+   }
+</script>
 <%
     try{
         String username = request.getParameter("username");   
@@ -29,12 +33,12 @@
                 User.subscription = "yes";
             out.println(username);
         %>
+        <script type="text/javascript"> window.onbeforeunload = alertName; </script>
            <jsp:forward page = "welcome.jsp"/>      
         <%}
         else
         {%>
-           Authentication failure.
-           <jsp:include page = "index.html"/>
+           <jsp:forward page = "logout.jsp"/>
         <%}
    }
    catch(Exception e){       
