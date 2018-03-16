@@ -29,6 +29,11 @@ Released   : 20140221
 <title>JIS: Judiciary Information System</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<!For table>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="table.css">
+<!end for table>
 <link href="http://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
 <link href="default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
@@ -59,6 +64,18 @@ Released   : 20140221
 		<div id="content">
 			<div class="title">
                             <!Header here>
+                            <div class="container">
+                                <h2></h2>
+                                <ul class="responsive-table">
+                                    <li class="table-header">
+                                        <div class="col col-1">ID</div>
+                                        <div class="col col-2">Details</div>
+                                        <div class="col col-3">Date</div>
+                                        <div class="col col-4">Lawyer</div>
+                                        <div class="col col-5">Defendant</div>
+                                        <div class="col col-6">Crime</div>
+                                        <div class="col col-7"></div>
+                                    </li>
 <%
     try{
         String keyword = request.getParameter("keyword");
@@ -79,18 +96,31 @@ Released   : 20140221
            String defendant = rs.getString("defendant");
            String crime = rs.getString("crime");
            String status = rs.getString("status");
-           out.println("Id: "+id+"\tDetails: "+details+"\tDate: "+date+"\tLawyer: "+lawyer+"\tDefendant: "+defendant+"\tCrime: "+crime);
-           %><form method = "post" action="updatecase.jsp">
+           //out.println("Id: "+id+"\tDetails: "+details+"\tDate: "+date+"\tLawyer: "+lawyer+"\tDefendant: "+defendant+"\tCrime: "+crime);
+           %>
+           <li class="table-row">
+
+               <div class="col col-1"><%=id%></div>
+                    <div class="col col-2"><%=details%></div>
+                    <div class="col col-3"><%=date%></div>
+                    <div class="col col-4"><%=lawyer%></div>
+                    <div class="col col-5"><%=defendant%></div>
+                    <div class="col col-6"><%=crime%></div>
+                    <div class="col col-7">
+           <form method = "post" action="updatecase.jsp">
                <input type="hidden" name="case" value="<%=id%>" /> 
                <input type="hidden" name="status" value="<%=status%>" /> 
                <input type="submit" value="View details"/>
-           </form><br><%
+           </form></div>
+                    </li><%
         }
    }
    catch(Exception e){       
        out.println("Something went wrong !! Please try again\n"+e);       
    }     
 %>
+                                </ul>
+                            </div>
 
         <% if (!User.type.equals("judge"))
         {%>
