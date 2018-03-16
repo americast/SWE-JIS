@@ -68,11 +68,14 @@ Released   : 20140221
                 String details = request.getParameter("details");
                 String crime = request.getParameter("crime");
                 String defendant = request.getParameter("defendant");
+                String lawyer = request.getParameter("lawyer");
+                if (lawyer.equals("null"))
+                    lawyer = User.realname;
 
                 PreparedStatement pst = conn.prepareStatement("create table case"+caseno+"(seq int, details char(255), judge char(25), prosecutor char(25), date char(30));");
                 pst.executeUpdate();
                 
-                pst = conn.prepareStatement("insert into cases values ("+caseno+", \'"+details+"\',\'"+(new java.util.Date()).toLocaleString()+"\', \'"+defendant+"\', \'"+User.realname+"\', \'"+crime+"\',\'open\', \'"+User.name+"\', NULL);");
+                pst = conn.prepareStatement("insert into cases values ("+caseno+", \'"+details+"\',\'"+(new java.util.Date()).toLocaleString()+"\', \'"+defendant+"\', \'"+lawyer+"\', \'"+crime+"\',\'open\', \'"+User.name+"\', NULL);");
                 pst.executeUpdate();
                 
                 out.println("New case creation successful.");

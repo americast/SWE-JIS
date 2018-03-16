@@ -111,6 +111,7 @@ tr:nth-child(even) {
            //out.println("Id: "+id+"\tDetails: "+details+"\tDate: "+date+"\tLawyer: "+lawyer+"\tDefendant: "+defendant+"\tCrime: "+crime);
            %>
            <tr>
+               <td><%=id%></td>
                <td><%=details%></td>
                <td><%=date%></td>
                <td><%=lawyer%></td>
@@ -138,20 +139,47 @@ tr:nth-child(even) {
             Enter brief details: <input type="text" name="details" required/> <br>
             Enter name of defendant: <input type="text" name="defendant" required/> <br>
             Enter crime details: <input type="text" name="crime" required/> <br>
+                <% if (User.type.equals("registrar"))
+                {%>
+            Choose lawyer: <select name = "lawyer">
+           <%
+        try {
+            Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?" + "user=root&password=root");
+            PreparedStatement pst = conn.prepareStatement("Select * from login where type='lawyer';");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                String realname = rs.getString("realname");
+                String name = rs.getString("user");
+                %>
+                            <option value="<%=realname%>"> <%=realname%> </option>
+                <%          }
+                    } catch (Exception e) {
+                        out.println("Something went wrong !! Please try again.\n" + e);
+                    }
+                
+                %>
+            </select><br>
+                <%}
+                else
+                {%>
+                <input type="hidden" name="lawyer" value="null" />
+                    <%}%>
             <br>
             <input type="submit" value="Create new case" />
         </form>
         <%}%>
 
+               
                 <!Here footer>
                 </div></div>
     		<div id="sidebar">
 			<div class="box2">
 				<div class="title">
-					<h2>Search</h2>
+					<h2>Welcome <%=User.type%></h2>
 				</div>
 				<ul class="style2">
-					<li></li>
+					<li><%=User.realname%></li>
 				</ul>
 			</div>
 		</div>

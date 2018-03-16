@@ -94,10 +94,10 @@ Released   : 20140221
     		<div id="sidebar">
 			<div class="box2">
 				<div class="title">
-					<h2>Search</h2>
+					<h2>Welcome <%=User.type%></h2>
 				</div>
 				<ul class="style2">
-					<li></li>
+					<li><%=User.realname%></li>
 				</ul>
 			</div>
 		</div>
