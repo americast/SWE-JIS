@@ -13,6 +13,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import java.sql.*;
 import static org.junit.Assert.*;
 
 /**
@@ -59,15 +60,25 @@ public class UserTest {
     }
     
     @Test
-    public void user() throws IOException {
+    public void user() throws IOException, ClassNotFoundException, SQLException {
         // TODO review the generated test code and remove the default call to fail.
         BufferedReader br = new BufferedReader(new FileReader("/users/TeamVideoSummarization/username.txt"));
         String status = br.readLine();
         assertEquals("username", "b", status);
         
         br = new BufferedReader(new FileReader("/users/TeamVideoSummarization/realname.txt"));
-        status = br.readLine();
-        assertEquals("realname", "B B", status);
+        String status2 = br.readLine();
+        assertEquals("realname", "B B", status2);
+        
+        Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?" + "user=root&password=root");    
+        PreparedStatement pst = conn.prepareStatement("select pass from login where user='"+status+"';");
+        ResultSet rs = pst.executeQuery();
+        String pwd="";
+        if(rs.next())
+            pwd = rs.getString("pass");
+        
+        assertEquals("password", "b", pwd);
 //        fail("The test case is a prototype.");
     }
     
