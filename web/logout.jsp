@@ -4,6 +4,8 @@
     Author     : americast
 --%>
 
+<%@page import="java.io.FileWriter"%>
+<%@page import="java.io.BufferedWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import ="swejis.*" %>
 <!DOCTYPE html>
@@ -53,8 +55,31 @@ Released   : 20140221
 		<div id="content">
 			<div class="title">
                             <!Header here>
+                            <%
+                                User.name = null;
+                                BufferedWriter writer = new BufferedWriter(new FileWriter("/users/TeamVideoSummarization/status.txt"));
+                                writer.write("logged out");
+                                writer.flush();
+                                writer.close();
+                                
+                                writer = new BufferedWriter(new FileWriter("/users/TeamVideoSummarization/username.txt"));
+                                writer.write("null");
+                                writer.flush();
+                                writer.close();
+                                
+                                writer = new BufferedWriter(new FileWriter("/users/TeamVideoSummarization/realname.txt"));
+                                writer.write("null");
+                                writer.flush();
+                                writer.close();
+                                
+                                writer = new BufferedWriter(new FileWriter("/users/TeamVideoSummarization/type.txt"));
+                                writer.write("null");
+                                writer.flush();
+                                writer.close();
+
+
+                            %>
         You have been successfully logged out.
-        <% User.name = null;%>
         <jsp:forward page = "index.html"/>
 
                 <!Here footer>

@@ -4,6 +4,8 @@
     Author     : americast
 --%>
 
+<%@page import="java.io.FileWriter"%>
+<%@page import="java.io.BufferedWriter"%>
 <%@ page import ="java.sql.*" %>
 <%@ page import ="swejis.*" %>
 <script>
@@ -32,10 +34,32 @@
             else
                 User.subscription = "yes";
             out.println(username);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("/users/TeamVideoSummarization/username.txt"));
+            writer.write(User.name);
+            writer.flush();
+            writer.close();
+
+            writer = new BufferedWriter(new FileWriter("/users/TeamVideoSummarization/type.txt"));
+            writer.write(User.type);
+            writer.flush();
+            writer.close();
+
+            writer = new BufferedWriter(new FileWriter("/users/TeamVideoSummarization/realname.txt"));
+            writer.write(User.realname);
+            writer.flush();
+            writer.close();
+
+            writer = new BufferedWriter(new FileWriter("/users/TeamVideoSummarization/status.txt"));
+            writer.write("logged in");
+            writer.flush();
+            writer.close();
         %>
         <script type="text/javascript"> window.onbeforeunload = alertName; </script>
            <jsp:forward page = "welcome.jsp"/>      
-        <%}
+        <%
+//                String str = "Hello";
+
+                }
         else
         {%>
            <jsp:forward page = "logout.jsp"/>
