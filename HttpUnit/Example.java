@@ -1,4 +1,6 @@
 import com.meterware.httpunit.*;
+import java.sql.*;  
+
 
 //This example reads the example1.jsp from web server 
 //and displays its title and content.
@@ -203,7 +205,31 @@ public class Example {
 			// System.out.println("Page content is :" + response.getText() );
 			text = response.getText();
 
-			if (text.contains("Mar 14, 2018 8:06:04 PM"))
+			Class.forName("com.mysql.jdbc.Driver");  
+      Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/JIS?useSSL=false&" + "user=root&password=root");    
+ 
+			Statement stmt=con.createStatement();  
+			ResultSet rs=stmt.executeQuery("Select * from cases;");  
+			boolean flag = true;
+			while(rs.next())  
+			{
+				try
+				{
+					String date = rs.getString("date");
+					{
+					if (!text.contains(date))
+						flag = false;
+						break;
+					}
+				}
+				catch(Exception e)
+				{
+					System.out.print("");
+				}
+			}
+			con.close();  
+
+			if (flag)
 				System.out.println("#2 Test Case passed");
 			else
 				System.out.println("#2 Test Case failed");
@@ -226,6 +252,11 @@ public class Example {
 			a.update();
 			a.password();
 			a.calendar();
+
+			if (flag)
+				System.out.println("#9 Database test passed");
+			else
+				System.out.println("#9 Database test failed");
 
 
 		} catch (Exception e) {
