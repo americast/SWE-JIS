@@ -6,6 +6,38 @@ import java.sql.*;
 //and displays its title and content.
 public class Example {
 
+	void attorney()
+	{
+
+		try
+		{
+					WebConversation wc = new WebConversation();
+
+					WebRequest request = new 
+					GetMethodWebRequest( "http://localhost:8080/JIS/index.html" );
+					WebResponse response = wc.getResponse( request );
+
+
+					WebForm loginForm = response.getForms()[1];
+					request = loginForm.getRequest();
+					request.setParameter( "keyword", "a" );
+					response = wc.getResponse( request );
+
+
+					if (response.getText().contains("lawyer"))
+						System.out.println("#9 Attorney search passed");
+					else
+						System.out.println("#9 Attorney search failed");
+				}
+				catch (Exception e)
+				{
+								System.err.println( "Exception: " + e );
+
+				}
+
+	}
+
+
 	void calendar()
 	{
 
@@ -252,11 +284,12 @@ public class Example {
 			a.update();
 			a.password();
 			a.calendar();
+			a.attorney();
 
 			if (flag)
-				System.out.println("#9 Database test passed");
+				System.out.println("#10 Database test passed");
 			else
-				System.out.println("#9 Database test failed");
+				System.out.println("#10 Database test failed");
 
 
 		} catch (Exception e) {
